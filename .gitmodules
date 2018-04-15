@@ -1,0 +1,8 @@
+[submodule "Hypervisor/Normal"]
+	path = Hypervisor/Normal
+	url = https://github.com/prplfoundation/prpl-hypervisor
+	branch = master
+[submodule "Hypervisor/Secure"]
+	path = Hypervisor/Secure
+	url = https://github.com/prplfoundation/prpl-hypervisor
+	master = secure-boot-vm
