@@ -5,13 +5,10 @@ Study about IoT Security for the "Integradora 2" class.
 
 https://github.com/prplfoundation/prpl-hypervisor
 
-# Normal
+# Hypervisor
 
-- The master branch one
+- The Secure Version
 
-# Secure
-
-- The one with Secure Boot, branch is secure-boot-vm
 
 # Download Submodules:
 - git submodule init
