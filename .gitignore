@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+
+# Specific
+**/*.bin
+**/*.cnt
+**/*.elf
+**/*.lst
+**/*.map
+**/*.o
+**/*.sec
+**/*.hex
+
+include/config.h
+
