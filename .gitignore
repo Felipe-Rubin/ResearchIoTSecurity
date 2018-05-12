@@ -45,9 +45,10 @@
 
 *.sublime-workspace
 *.sublime-project
+Notes.txt
 
 # MacOS Indexing
-#.DS_Store
+.DS_Store
 
 
 include/config.h
