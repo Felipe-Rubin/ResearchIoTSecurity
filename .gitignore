@@ -41,5 +41,14 @@
 **/*.sec
 **/*.hex
 
+# Sublime Text Project
+
+*.sublime-workspace
+*.sublime-project
+
+# MacOS Indexing
+#.DS_Store
+
+
 include/config.h
 
