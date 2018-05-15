@@ -142,5 +142,12 @@ typedef void hypercall_t();
  */ 
 #define HCALL_UPDATE_VM_ID 16
 
+//Author: Felipe Pfeifer Rubin
+/* Get list of VM's that can be updated
+ * A0 = new firmware
+ * V0 = List of VM id. size 0 means no VM , break in attempt
+ */
+#define HCALL_UPDATE_GET_ALLOWED 17
+
 #endif
 

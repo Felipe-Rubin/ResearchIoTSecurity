@@ -30,6 +30,10 @@ CONFIG_SECURITY = yes
 CONFIG_VIRTUAL_IO_DRV = yes
 CONFIG_INTERRUPT_REDIRECT_DRV = yes
 
+#Author: Felipe Pfeifer Rubin
+# VM UPDATE DRIVER
+CONFIG_VM_UPDATE = yes
+
 # Platform info
 CFLAGS = -DCPU_ID="M5150"
 CFLAGS += -DCPU_ARCH="Microchip Starter Kit"
