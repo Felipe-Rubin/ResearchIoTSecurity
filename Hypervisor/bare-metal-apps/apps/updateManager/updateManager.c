@@ -13,6 +13,8 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 This code was written by Carlos Moratelli at Embedded System Group (GSE) at PUCRS/Brazil.
 
+This code was modified by Felipe Pfeifer Rubin
+
 */
 
 /* Simple TCP listener server using picoTCP stack 
