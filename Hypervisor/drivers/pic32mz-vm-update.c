@@ -28,9 +28,16 @@
  * @brief Update the VM chosen
  * Input a0: VM ID
  * Input a1: Firmware Update buffer pointer
+ * Input a2: Firmware size
  * Output v0: 1 = success or 0 = failure
  */
 void update_chosen_vm(){
+
+	/* Get arguments from regs */
+
+	vcpu_t *vcpu;
+	uint32_t vmid = MoveFromPreviousGuestGPR(REG_A0);
+	vcpu = get_vcpu_from_id(vmid);
 	/* Check again if the chosen VM signature matches the firmware*/
 
 	/*Stops VM */
@@ -45,19 +52,25 @@ void update_chosen_vm(){
 /**
  * @brief Check Signature, Returns list of VM's to choose from
  * Input: a0: Firmware Update buffer pointer
+ * Input: a1: Firmware size
  * Output: v0: List of VM 
  */
-
 
 void get_allowed_vm(){
 	vcpu_t *vcpu;
 
+	//Char or UINT8_T ?
 	char* updt_buffr = (char*)MoveFromPreviousGuestGPR(REG_A0);
 
 	/* Read Last part of buffer and saves VM signature */
 	
 	/* Reads For each VCPU with same signature, add it to the list...*/
+	uint32_t i;
 
+	for(i = 0; i < NVMACHINES; i++){
+		vcpu = get_vcpu_from_id(i+1);
+		// vm_t
+	}
 
 }
 
