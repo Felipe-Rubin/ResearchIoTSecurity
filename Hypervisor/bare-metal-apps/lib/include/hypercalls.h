@@ -157,8 +157,22 @@ asm volatile (                    \
  : "=r" (__ret) : "r" ((uint32_t) (buf)), "I" (HCALL_FLASH_WRITE) : "a0", "v0"); \
  __ret; })
  
- 
- 
+//Author: Felipe Pfeifer Rubin
+/*Receive which VM to update- Update VM specific function*/
+#define update_vm(targetid,buf,size) ({int32_t __ret;\
+ asm volatile (							\
+ "move $a0, %z1 \n \
+  move $a1, %z2 \n \
+  move $a2, %z3 \n \
+  hypcall %4 \n\
+  move %0, $v0" \
+  : "=r" (__ret) : "r" ((uint32_t) (target_id)), "r" ((uint32_t) (buf)), "r" ((uint32_t) (size)), "I" (HCALL_UPDATE_VM_ID) : "a0", "a1", "a2", "v0"); \
+  __ret; })
+
+
+// TO DO
+/*Request allowed VMs to update- Update VM specific function*/
+// #define  get_allowed_update()
  
 #endif
 
