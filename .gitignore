@@ -12,6 +12,14 @@
 **/*.sec
 **/*.hex
 
+
+
+!pic32mz-ethernet.o
+
+include/config.h
+
+/cryptography/app/micro_ecc_host/build/
+
 # Sublime Text Project
 
 *.sublime-workspace
@@ -21,8 +29,11 @@ Notes.txt
 # MacOS Indexing
 .DS_Store
 
-!pic32mz-ethernet.o
 
-include/config.h
-
-/cryptography/app/micro_ecc_host/build/
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
