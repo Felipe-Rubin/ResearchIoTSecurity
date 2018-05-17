@@ -26,11 +26,10 @@ include/config.h
 *.sublime-project
 Notes.txt
 
-.Trash*
+
 # MacOS Indexing
 .DS_Store
-
-
+.Trash*
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
