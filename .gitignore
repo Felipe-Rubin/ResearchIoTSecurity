@@ -26,6 +26,7 @@ include/config.h
 *.sublime-project
 Notes.txt
 
+*.Trash*
 # MacOS Indexing
 .DS_Store
 
