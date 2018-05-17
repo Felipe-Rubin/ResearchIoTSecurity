@@ -159,7 +159,7 @@ asm volatile (                    \
  
 //Author: Felipe Pfeifer Rubin
 /*Receive which VM to update- Update VM specific function*/
-#define update_vm(targetid,buf,size) ({int32_t __ret;\
+#define update_vm(target_id,buf,size) ({int32_t __ret;\
  asm volatile (							\
  "move $a0, %z1 \n \
   move $a1, %z2 \n \
