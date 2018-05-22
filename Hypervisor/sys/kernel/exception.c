@@ -67,8 +67,6 @@ static uint32_t guest_exit_exception(){
  * 
  */
 void general_exception_handler(){
-		// printf("GUEST EXIT EXCEPTION \n");
-
 	uint32_t CauseCode = getCauseCode();
 
 	switch (CauseCode){
@@ -76,8 +74,7 @@ void general_exception_handler(){
 				guest_exit_exception();
 				break;
 		/* TLB load, store or fetch exception */
-		case    TLB_LOAD_FETCH_EXCEPTION:     
-			printf("TLB_LOAD_EXCEPTION \n");                                       
+		case    TLB_LOAD_FETCH_EXCEPTION:                                            
 		case    TLB_STORE_EXCEPTION:
 		default:
 			CRITICAL("VM will be stopped due to error Cause Code 0x%x, EPC 0x%x, VCPU ID 0x%x", CauseCode, getEPC(), vcpu_executing->id);
