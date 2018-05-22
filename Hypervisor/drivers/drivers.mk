@@ -40,7 +40,6 @@ ifeq ($(CONFIG_VM_UPDATE),yes)
 endif 
 
 
-
 drivers:
 	$(CC) $(CFLAGS) $(INC_DIRS) $(DRIVER_INCLUDE) $(DRIVERS_LIST)
 	     
