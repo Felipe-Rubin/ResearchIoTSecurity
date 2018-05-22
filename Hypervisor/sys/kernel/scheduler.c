@@ -71,6 +71,7 @@ static struct list_t* round_robin_scheduler(){
  * 
  */
 void fast_interrupt_delivery(struct list_t *target){
+
 	/* Do not reschedule if the VCPU is already in execution. */
 	if (target == scheduler_info.vcpu_executing_nd){
 		return;
