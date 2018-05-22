@@ -69,8 +69,8 @@ int32_t list_append(struct list_t **lst, void *item)
 	
 	return 0;
 }
-
-
+ 
+ 
 /**
  * @brief Removes all elements of the list.
  * 
@@ -112,7 +112,3 @@ int32_t list_count(struct list_t *lst)
 	return i;
 }
 
-// int32_t list_remove_at(struct list_t **list)
-// {
-
-// }
