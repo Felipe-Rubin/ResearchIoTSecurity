@@ -149,5 +149,6 @@ typedef void hypercall_t();
  */
 #define HCALL_UPDATE_GET_ALLOWED 17
 
+
 #endif
 
