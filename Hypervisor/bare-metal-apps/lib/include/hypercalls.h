@@ -157,7 +157,8 @@ asm volatile (                    \
  : "=r" (__ret) : "r" ((uint32_t) (buf)), "I" (HCALL_FLASH_WRITE) : "a0", "v0"); \
  __ret; })
  
-//Author: Felipe Pfeifer Rubin
+ 
+ //Author: Felipe Pfeifer Rubin
 /*Receive which VM to update- Update VM specific function*/
 #define update_vm(target_id,buf,size) ({int32_t __ret;\
  asm volatile (							\
@@ -173,6 +174,7 @@ asm volatile (                    \
 // TO DO
 /*Request allowed VMs to update- Update VM specific function*/
 // #define  get_allowed_update()
+
  
 #endif
 
