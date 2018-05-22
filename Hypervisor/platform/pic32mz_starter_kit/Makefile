@@ -17,7 +17,8 @@
 #CFG_FILE = cfg/sample-ping-pong.cfg
 #CFG_FILE = cfg/sample-blink.cfg
 #CFG_FILE = cfg/sample-3VMs.cfg
-CFG_FILE = cfg/sample-failure.cfg
+#CFG_FILE = cfg/sample-failure.cfg
+CFG_FILE = cfg/sample-testhcall.cfg
 
 # CROSS Compiler 
 CROSS_COMPILER = mips-mti-elf-
@@ -33,6 +34,7 @@ CONFIG_INTERRUPT_REDIRECT_DRV = yes
 #Author: Felipe Pfeifer Rubin
 # VM UPDATE DRIVER
 CONFIG_VM_UPDATE = yes
+
 
 # Platform info
 CFLAGS = -DCPU_ID="M5150"
