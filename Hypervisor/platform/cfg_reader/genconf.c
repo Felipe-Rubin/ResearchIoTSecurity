@@ -51,7 +51,8 @@ This code was written by Carlos Moratelli at Embedded System Group (GSE) at PUCR
 #define VMS_RAM_VIRTUAL_BASE_ADDRESS  0x80000000
 
 /* Intermediate Physical address of the first VM on the FLASH */
-#define VMS_FLASH_INTERMEDIATE_BASE_ADDRESS  0x9D008000
+// #define VMS_FLASH_INTERMEDIATEBASE__ADDRESS  0x9D008000
+#define VMS_FLASH_INTERMEDIATE_BASE_ADDRESS  0x9D010000
 
 /* Virtual address for VM's FLASH */
 #define VMS_FLASH_VIRTUAL_BASE_ADDRESS  0x9D000000
