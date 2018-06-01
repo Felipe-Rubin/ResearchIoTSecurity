@@ -23,6 +23,8 @@
 #include <globals.h>
 #include <interrupts.h>
 
+#include <linkedlist.h>
+#include <vcpu.h>
 
 /**
  * @brief Update the VM chosen
@@ -34,13 +36,32 @@
 void update_chosen_vm(){
 
 	/* Get arguments from regs */
-
 	vcpu_t *vcpu;
 	uint32_t vmid = MoveFromPreviousGuestGPR(REG_A0);
-	vcpu = get_vcpu_from_id(vmid);
+	
 	/* Check again if the chosen VM signature matches the firmware*/
+	
 
-	/*Stops VM */
+	 
+	 /*Stops VM */
+ 	struct list_t *aux;
+ 	
+ 	aux = scheduler_info.vcpu_ready_list;
+
+ 	if(((vcpu_t*)aux->elem)->id != vmid){ //Se for Head ja tenho, n preciso procurar
+ 		while(aux->next != NULL && ((vcpu_t*)aux->next->elem)->id != vmid){
+ 			aux = aux->next;
+		}
+ 	}
+
+	if(((vcpu_t*)aux->elem)->id == vmid){ //It was the Head Element
+		printf("Era Head\n");
+		aux = aux->next;
+		scheduler_info.vcpu_ready_list = aux;
+	}else if(aux->next != NULL){ //Wasn't Head Element
+		aux->next = aux->next->next;
+		printf("N era Head\n");
+	}
 
 	/* Write on Flash*/
 
