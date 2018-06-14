@@ -24,6 +24,14 @@ https://github.com/prplfoundation/prpl-hypervisor
 # Using Parallels Desktop:
 - Need to configure another Network Interface to share Ethernet.
 
+# Using tcp-listener application
+- If on Parallels Desktop, be sure that there's an interface shared from "thunderbolt ethernet".
+- Connect PIC32 through Ethernet cable
+- $ sudo ifconfig enp0s6:1 192.168.0.1
+- $ ping 192.168.0.2 (Checking if it is working)
+- $ telnet 192.168.0.2 80 (Connect to telnet <ip> <port>)
+- TO quit: 'ctrl' + ']' 
+
 # Common Mistakes:
 - Do not open the comm interface (/dev/ttyAC0) before fully finishing make load
 
