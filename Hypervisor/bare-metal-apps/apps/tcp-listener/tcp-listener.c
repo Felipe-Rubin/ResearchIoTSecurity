@@ -165,9 +165,12 @@ static void cb_tcp(uint16_t ev, struct pico_socket *sock)
 
 int main()
 {
+    printf("Begin TCP-Listener\n");
     uint8_t mac[6];
     uint32_t timer = 0;
     
+    // Check 0
+
     /* Obtain the ethernet MAC address */
 	eth_mac(mac);
     
