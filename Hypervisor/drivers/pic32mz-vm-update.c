@@ -40,28 +40,35 @@ void update_chosen_vm(){
 	uint32_t vmid = MoveFromPreviousGuestGPR(REG_A0);
 	
 	/* Check again if the chosen VM signature matches the firmware*/
-	
 
-	 
+
 	 /*Stops VM */
- 	struct list_t *aux;
+ // 	struct list_t *aux;
  	
- 	aux = scheduler_info.vcpu_ready_list;
+ // 	aux = scheduler_info.vcpu_ready_list;
+ 	
+ // 	if(((vcpu_t*)aux->elem)->id != vmid){ //No need to search if it Head elem
+ // 		while(aux->next != NULL && ((vcpu_t*)aux->next->elem)->id != vmid){
+ // 			aux = aux->next;
+	// 	}
+ // 	}
 
- 	if(((vcpu_t*)aux->elem)->id != vmid){ //Se for Head ja tenho, n preciso procurar
- 		while(aux->next != NULL && ((vcpu_t*)aux->next->elem)->id != vmid){
- 			aux = aux->next;
-		}
- 	}
+	// if(((vcpu_t*)aux->elem)->id == vmid){ //It was the Head Element
+	// 	printf("Era Head\n");
+	// 	aux = aux->next;
+	// 	scheduler_info.vcpu_ready_list = aux;
+	// }else if(aux->next != NULL){ //Wasn't Head Element
+	// 	aux->next = aux->next->next;
+	// 	printf("N era Head\n");
+	// }
 
-	if(((vcpu_t*)aux->elem)->id == vmid){ //It was the Head Element
-		printf("Era Head\n");
-		aux = aux->next;
-		scheduler_info.vcpu_ready_list = aux;
-	}else if(aux->next != NULL){ //Wasn't Head Element
-		aux->next = aux->next->next;
-		printf("N era Head\n");
-	}
+	//Begin Test READ FLASH
+	
+	// uint32_t ret;
+	
+	// uint8_t *dest = uint8_t * dest = (uint8_t *) tlbCreateEntry((uint32_t) MoveFromPreviousGuestGPR(REG_A0), vm_executing->base_addr, sizeof(uint8_t) * 1024, 0xf, CACHEABLE);
+	
+	//END Test READ FLASH
 
 	/* Write on Flash*/
 
@@ -81,17 +88,35 @@ void get_allowed_vm(){
 	vcpu_t *vcpu;
 
 	//Char or UINT8_T ?
-	char* updt_buffr = (char*)MoveFromPreviousGuestGPR(REG_A0);
+	/* uint32_t publicKey[16] */
+	// uint32_t* updt_buffr = (char*)MoveFromPreviousGuestGPR(REG_A0);
+	uint32_t *testkey = (uint32_t*) MoveFromPreviousGuestGPR(REG_A0); /* Public key to test */
+	printf("get_allowed_vm()\n");
+	uint32_t i;
+	// printf("Received %u\n",testkey);
+	// for(i = 0;  i < 64; i++){
+	// 	printf("%x ",((uint8_t*)testkey)[i]);
+	// }
+	for(i = 0; i < 16; i++){
+		printf("%d",testkey[i]);
+	}
+	printf("\n\n");
+
+
+	/* Returns Ok!*/
+	uint32_t ret = 1;
+	MoveToPreviousGuestGPR(REG_V0, ret);
+
+
 
 	/* Read Last part of buffer and saves VM signature */
 	
 	/* Reads For each VCPU with same signature, add it to the list...*/
-	uint32_t i;
+	// uint32_t i;
 
-	for(i = 0; i < NVMACHINES; i++){
-		vcpu = get_vcpu_from_id(i+1);
-		// vm_t
-	}
+	// for(i = 0; i < NVMACHINES; i++){
+	// 	vcpu = get_vcpu_from_id(i+1);
+	// }
 
 }
 
