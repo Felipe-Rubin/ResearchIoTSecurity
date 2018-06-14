@@ -173,7 +173,14 @@ asm volatile (                    \
 
 // TO DO
 /*Request allowed VMs to update- Update VM specific function*/
-// #define  get_allowed_update()
+#define  get_allowed_update(pubkey)({int32_t __ret; \
+ asm volatile (                    \
+ "move $a0, %z1 \n \
+ hypcall %2 \n\
+ move %0, $v0" \
+ : "=r" (__ret) : "r" ((uint32_t) (pubkey)), "I" (HCALL_UPDATE_GET_ALLOWED) : "a0", "v0"); \
+ __ret; })
+ 
 
  
 #endif
