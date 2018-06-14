@@ -48,6 +48,10 @@ extern struct scheduler_info_t scheduler_info;
 #define vcpu_executing ((vcpu_t*)scheduler_info.vcpu_executing_nd->elem)
 #define vm_executing   ((vm_t*)vcpu_executing->vm)
 
+
+#define vcpu_in_execution ((vcpu_t*)scheduler_info.vcpu_executing_nd->elem)
+#define vm_in_execution   ((vm_t*)vcpu_executing->vm)
+
 #define MICROSECOND (MILISECOND/1000)
 
 /* Hypervisor tick interval in microseconds */

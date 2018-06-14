@@ -60,7 +60,7 @@ int eth_link_state(struct pico_device *dev){
  */
 void eth_watchdog(uint32_t *time, uint32_t ms_delay){
     if (wait_time(*time, ms_delay)){
-	    link_state = eth_watch();
+        link_state = eth_watch();
             *time = mfc0(CP0_COUNT, 0);
     }
 }
@@ -73,7 +73,7 @@ void eth_watchdog(uint32_t *time, uint32_t ms_delay){
  * @return number of bytes sent. 
  */
 int eth_send(struct pico_device *dev, void *buf, int len){
-	return eth_send_frame(buf, len);
+    return eth_send_frame(buf, len);
 }
 
 /** 
@@ -87,7 +87,7 @@ int eth_poll(struct pico_device *dev, int loop_score){
     
     while(loop_score > 0){
         
-	size = eth_recv_frame(frame_buf);
+    size = eth_recv_frame(frame_buf);
         if (size<=0){
             break;
         }
@@ -99,7 +99,6 @@ int eth_poll(struct pico_device *dev, int loop_score){
 }
 
 #endif
-
 
 
 

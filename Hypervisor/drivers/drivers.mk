@@ -39,6 +39,11 @@ ifeq ($(CONFIG_VM_UPDATE),yes)
 	DRIVERS_LIST += $(TOPDIR)drivers/pic32mz-vm-update.c
 endif 
 
+ifeq ($(CONFIG_PIC32MZ_ETHERNET_DRV),yes)
+	DRIVERS_LIST += $(TOPDIR)drivers/pic32mz-ethernet.c
+endif 
+
+
 
 drivers:
 	$(CC) $(CFLAGS) $(INC_DIRS) $(DRIVER_INCLUDE) $(DRIVERS_LIST)

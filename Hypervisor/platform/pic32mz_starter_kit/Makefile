@@ -18,7 +18,9 @@
 #CFG_FILE = cfg/sample-blink.cfg
 #CFG_FILE = cfg/sample-3VMs.cfg
 #CFG_FILE = cfg/sample-failure.cfg
-CFG_FILE = cfg/sample-testhcall.cfg
+# CFG_FILE = cfg/sample-testhcall.cfg
+# CFG_FILE = cfg/sample-read-flash.cfg
+CFG_FILE = cfg/sample-tcp-listener.cfg
 
 # CROSS Compiler 
 CROSS_COMPILER = mips-mti-elf-
@@ -31,10 +33,12 @@ CONFIG_SECURITY = yes
 CONFIG_VIRTUAL_IO_DRV = yes
 CONFIG_INTERRUPT_REDIRECT_DRV = yes
 
+
+
 #Author: Felipe Pfeifer Rubin
 # VM UPDATE DRIVER
-CONFIG_VM_UPDATE = yes
-
+# CONFIG_VM_UPDATE = yes
+# CONFIG_PUF_FLASH_DRV = yes
 
 # Platform info
 CFLAGS = -DCPU_ID="M5150"
@@ -109,9 +113,9 @@ include board/board.mk
 include $(TOPDIR)/drivers/drivers.mk
 include $(TOPDIR)/cryptography/cryptography.mk
 
-ifeq ($(CONFIG_PIC32MZ_ETHERNET_DRV),yes)
-    OBJ = ../../bin/pic32mz-ethernet.o
-endif
+# ifeq ($(CONFIG_PIC32MZ_ETHERNET_DRV),yes)
+#     OBJ = ../../bin/pic32mz-ethernet.o
+# endif
     
 
 $(APP): 
@@ -148,13 +152,15 @@ config_vms: make_genconf
 	#execute and export to a makefile variable the ouput of the script
 	$(eval APP_LIST:=$(shell ./genconf $(CFG_FILE) || (exit 1)))
 
-	
-clean: config_vms
-	rm -f $(APP).* 
-	rm -f *.o
-	rm -f firmware.hex
-	rm -rf include
-	rm -f genconf
+
+# Felipe Pfeifer Rubin
+# The rm's are commented to better debugging, need to uncomment it later!
+clean: config_vms  
+	# rm -f $(APP).* 
+	# rm -f *.o
+	# rm -f firmware.hex
+	# rm -rf include
+	# rm -f genconf
 	
 	for i in $(APP_LIST) ; do \
 		$(MAKE) -C ../../bare-metal-apps/platform/pic32mz_starter_kit APP=$$i CLEAN=1 clean \
