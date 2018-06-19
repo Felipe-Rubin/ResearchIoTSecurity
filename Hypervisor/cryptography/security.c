@@ -50,7 +50,7 @@ int isVmTrust(void)
 
         (lAddrVm) = (unsigned char*) VMCONF[countNumMachines].flash_base_add;
 
-        //        INFO("Configuring VM %d, of size %d FLASH size, address: %x.\n\n", countNumMachines, VMCONF[countNumMachines].flash_size, (char*) lAddrVm);
+        INFO("Configuring VM %d, of size %d FLASH size, address: %x.\n\n", countNumMachines, VMCONF[countNumMachines].flash_size, (char*) lAddrVm);
 
         int countSign = 0, countPubKey = 0;
         long sizeVm = VMCONF[countNumMachines].flash_size; //size VM+pubKey+signature 
@@ -58,16 +58,17 @@ int isVmTrust(void)
         uint8_t public[64];
         uint8_t sigReceived[64];
 
+        // printf("FI[%ld]\n",(sizeVm - 128));
         //----------------------------------------------------------------------
         //read public key
         for (countPubKey = 0; countPubKey < 64; countPubKey++) {
             public[countPubKey] = lAddrVm[(sizeVm - 128) + countPubKey];
         }
-        //debug public key
-        //        printf("uint8_t PubKey[2*NUM_ECC_DIGITS] = {");
-        //        vli_print(public, sizeof (public));
-        //        printf("};\n");
-        //        printf("\n\n");
+        /*debug public key*/
+               // printf("uint8_t PubKey[2*NUM_ECC_DIGITS] = {");
+               // vli_print(public, sizeof (public));
+               // printf("};\n");
+               // printf("\n\n");
         initialCountVerifyPK = getCounter();
         //verify public key
         if (!uECC_valid_public_key(public, uECC_secp256k1())) {
@@ -78,16 +79,16 @@ int isVmTrust(void)
         }*/
         finalCounterVerifyPK = getCounter();
         //----------------------------------------------------------------------
-        //read signature
+        //read asignture
         for (countSign = 0; countSign < 64; countSign++) {
             sigReceived[countSign] = lAddrVm[(sizeVm - 64) + countSign];
         }
-        //debug signature
-        //        printf("uint8_t Signature[2*NUM_ECC_DIGITS] = {");
-        //        vli_print(sigReceived, sizeof (sigReceived));
-        //        printf("};\n");
-        //        printf("\n\n");
-        //----------------------------------------------------------------------
+        // debug signature
+               // printf("uint8_t Signature[2*NUM_ECC_DIGITS] = {");
+               // vli_print(sigReceived, sizeof (sigReceived));
+               // printf("};\n");
+               // printf("\n\n");
+        // ----------------------------------------------------------------------
 
         //read vm to calculate hash
         //for (i = 0; i < (sizeVm-128); i++) {//read vm excluding Public Key and Signature

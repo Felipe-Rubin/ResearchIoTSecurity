@@ -18,9 +18,10 @@
 #CFG_FILE = cfg/sample-blink.cfg
 #CFG_FILE = cfg/sample-3VMs.cfg
 #CFG_FILE = cfg/sample-failure.cfg
-# CFG_FILE = cfg/sample-testhcall.cfg
+CFG_FILE = cfg/sample-testhcall.cfg
 # CFG_FILE = cfg/sample-read-flash.cfg
-CFG_FILE = cfg/sample-tcp-listener.cfg
+
+# CFG_FILE = cfg/sample-tcp-listener.cfg
 
 # CROSS Compiler 
 CROSS_COMPILER = mips-mti-elf-
@@ -37,8 +38,8 @@ CONFIG_INTERRUPT_REDIRECT_DRV = yes
 
 #Author: Felipe Pfeifer Rubin
 # VM UPDATE DRIVER
-# CONFIG_VM_UPDATE = yes
-# CONFIG_PUF_FLASH_DRV = yes
+CONFIG_VM_UPDATE = yes
+CONFIG_PUF_FLASH_DRV = yes
 
 # Platform info
 CFLAGS = -DCPU_ID="M5150"
