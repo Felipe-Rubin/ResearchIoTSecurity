@@ -38,8 +38,11 @@ This code was written by Sergio Johann at Embedded System Group (GSE) at PUCRS/B
 
 
 /* Uses the last page 16Kb of the flash to data persistance */
-static uint32_t* pageFlash = (uint32_t *)0xbd1fc000;
-
+// static uint32_t* pageFlash = (uint32_t *)0xbd1fc000;
+// static uint32_t* pageFlash = (uint32_t *)0x9d010000;
+// static uint32_t* pageFlash = (uint32_t *)0x9D017F08;
+// 107F8000
+static uint32_t* pageFlash = (uint32_t *)0x9D017F80;
 static uint32_t flash_read1Kbuffer(uint8_t *buffer);
 static uint32_t flash_write1Kbuffer(uint8_t *buffer);
 
@@ -50,11 +53,21 @@ static uint32_t flash_write1Kbuffer(uint8_t *buffer);
  * 	Output:	v0 = Number of bytes read or less than 0 for error. 
  */
 static void flash_read(){
+	// printf("###At Flash Read##\n");
 	uint32_t ret;
 	
 	uint8_t * dest = (uint8_t *) tlbCreateEntry((uint32_t) MoveFromPreviousGuestGPR(REG_A0), vm_executing->base_addr, sizeof(uint8_t) * 1024, 0xf, CACHEABLE);
-	
+	//
+	uint32_t i;
+	//
 	ret = flash_read1Kbuffer(dest);
+	for(i = 0; i < 64;i++){
+		printf("%x",((uint8_t*)dest)[i]);
+	}
+	printf("\n");
+
+
+	// vli_print(dest,64 * sizeof(dest));
 	
 	MoveToPreviousGuestGPR(REG_V0, ret);
 }
