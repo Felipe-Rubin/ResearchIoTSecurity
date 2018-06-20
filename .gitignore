@@ -12,7 +12,7 @@
 **/*.sec
 **/*.hex
 
-
+!platform/pic32mz_starter_kit/pic32mz-ethernet.o
 
 !pic32mz-ethernet.o
 
