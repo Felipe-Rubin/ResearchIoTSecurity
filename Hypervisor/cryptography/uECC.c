@@ -1528,7 +1528,6 @@ int uECC_verify(const uint8_t *public_key,
     uECC_word_t r[uECC_MAX_WORDS], s[uECC_MAX_WORDS];
     wordcount_t num_words = curve->num_words;
     wordcount_t num_n_words = BITS_TO_WORDS(curve->num_n_bits);
-
     rx[num_n_words - 1] = 0;
     r[num_n_words - 1] = 0;
     s[num_n_words - 1] = 0;
