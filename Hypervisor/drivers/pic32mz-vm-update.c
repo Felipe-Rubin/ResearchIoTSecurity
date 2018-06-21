@@ -131,8 +131,21 @@ static int verifyPublicKey(vm_t *vm, uint8_t* public)
 
 	return verified;
 }
-
+/* Option 0, Test Received Public Key with Flash's*/
 static int verifyPublicKey2(vm_t *vm, uint8_t* public)
+{
+	int countPubKey = 0;
+    long sizeVm = vm->vmconf->flash_size;
+	unsigned char *lAddrVm = (unsigned char*) vm->vmconf->flash_base_add;
+	long sizeHash = sizeVm - 128; //only the size to calculate hash of vm
+    for (countPubKey = 0; countPubKey < 64; countPubKey++) {
+    	if(public[countPubKey] != lAddrVm[(sizeVm - 128) + countPubKey])
+    		return 0;
+	}
+	return 1;
+}
+/* Option 1, Test Received Public Key with Flash's*/
+static int verifyPublicKey3(vm_t *vm, uint8_t* public)
 {
 	uint32_t i;
 	int countPubKey = 0;
@@ -140,13 +153,49 @@ static int verifyPublicKey2(vm_t *vm, uint8_t* public)
     long sizeVm = vm->vmconf->flash_size;
 	unsigned char *lAddrVm = (unsigned char*) vm->vmconf->flash_base_add;
 	long sizeHash = sizeVm - 128; //only the size to calculate hash of vm
-   	// uint8_t testkey[64];
+
+   	uint8_t testkey[64];
+    for (countPubKey = 0; countPubKey < 64; countPubKey++) {
+    	testkey[countPubKey] = lAddrVm[(sizeVm - 128) + countPubKey];
+	}
+
+	if (!uECC_valid_public_key(testkey, uECC_secp256k1())) return 0;
+
+	// Read Signature From Flash 
+	uint8_t sigReceived[64];
+	for (countSign = 0; countSign < 64; countSign++) {
+        sigReceived[countSign] = lAddrVm[(sizeVm - 64) + countSign];
+    }
+
+	SHA256_CTX contextHash;
+	BYTE buf[SHA256_BLOCK_SIZE];
+
+	sha256_init(&contextHash);
+	sha256_update(&contextHash, lAddrVm, sizeHash);
+	sha256_final(&contextHash, buf);
+
+	int verified = 0;
+	verified = uECC_verify(testkey, buf, sizeof (buf), sigReceived, uECC_secp256k1());
+
+	/* Uncomment this if in fact uECC_verify indeed modifies testkey */
+	/*
     for (countPubKey = 0; countPubKey < 64; countPubKey++) {
     	if(public[countPubKey] != lAddrVm[(sizeVm - 128) + countPubKey])
     		return 0;
 	}
+	*/
+	
+	/* This would mean that the key from flash is invalid */
+	/* Which also means that in the next hw reset this VM won't boot */
+	if(!verified) return 0;
+
+	for(countPubKey = 0; countPubKey < 64; i++){
+		if(!(testkey[countPubKey] == public[countPubKey])) return 0; 
+		/* Uncomment this if the above doesn't work*/	
+	}
 	return 1;
 }
+
 static void get_allowed_vm(void){
 
 	printf("Trying to verify\n");
