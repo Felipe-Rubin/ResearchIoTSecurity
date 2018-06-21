@@ -18,10 +18,11 @@
 #CFG_FILE = cfg/sample-blink.cfg
 #CFG_FILE = cfg/sample-3VMs.cfg
 #CFG_FILE = cfg/sample-failure.cfg
-CFG_FILE = cfg/sample-testhcall.cfg
 # CFG_FILE = cfg/sample-read-flash.cfg
-
 # CFG_FILE = cfg/sample-tcp-listener.cfg
+
+# CFG_FILE = cfg/sample-testhcall.cfg
+CFG_FILE = cfg/sample-secure-connection.cfg
 
 # CROSS Compiler 
 CROSS_COMPILER = mips-mti-elf-

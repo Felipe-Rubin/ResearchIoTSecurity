@@ -26,6 +26,7 @@ https://github.com/prplfoundation/prpl-hypervisor
 
 # Using tcp-listener application
 - If on Parallels Desktop, be sure that there's an interface shared from "thunderbolt ethernet".
+- Also be sure that MacOS is not sharing in any way the Thunderbolt Ethernet port
 - Connect PIC32 through Ethernet cable
 - $ sudo ifconfig enp0s6:1 192.168.0.1
 - $ ping 192.168.0.2 (Checking if it is working)
