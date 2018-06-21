@@ -1,2 +1,3 @@
 VM name 	flash_size 	ram_size 	 address_start
-tcp-listener 	131072 	131072 	0x9d010000
+secureConnection 	131072 	131072 	0x9d010000
+blink 	32768 	32768 	0x9d030000

@@ -149,6 +149,12 @@ typedef void hypercall_t();
  */
 #define HCALL_UPDATE_GET_ALLOWED 17
 
+//Author: Felipe Pfeifer Rubin
+/**
+ *  Get List of Owned VMs
+ */
+#define HCALL_GET_OWNED_LIST 18
+
 
 #endif
 

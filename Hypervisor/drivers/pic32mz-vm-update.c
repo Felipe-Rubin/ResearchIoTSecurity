@@ -157,6 +157,7 @@ static int verifyPublicKey3(vm_t *vm, uint8_t* public)
    	uint8_t testkey[64];
     for (countPubKey = 0; countPubKey < 64; countPubKey++) {
     	testkey[countPubKey] = lAddrVm[(sizeVm - 128) + countPubKey];
+    	if(public[countPubKey] != testkey[countPubKey]) return 0;
 	}
 
 	if (!uECC_valid_public_key(testkey, uECC_secp256k1())) return 0;
@@ -177,22 +178,25 @@ static int verifyPublicKey3(vm_t *vm, uint8_t* public)
 	int verified = 0;
 	verified = uECC_verify(testkey, buf, sizeof (buf), sigReceived, uECC_secp256k1());
 
-	/* Uncomment this if in fact uECC_verify indeed modifies testkey */
-	/*
-    for (countPubKey = 0; countPubKey < 64; countPubKey++) {
-    	if(public[countPubKey] != lAddrVm[(sizeVm - 128) + countPubKey])
-    		return 0;
-	}
-	*/
+	
 	
 	/* This would mean that the key from flash is invalid */
 	/* Which also means that in the next hw reset this VM won't boot */
 	if(!verified) return 0;
 
-	for(countPubKey = 0; countPubKey < 64; i++){
-		if(!(testkey[countPubKey] == public[countPubKey])) return 0; 
-		/* Uncomment this if the above doesn't work*/	
-	}
+
+		/* Uncomment this if in fact uECC_verify indeed modifies testkey */
+	
+ //    for (countPubKey = 0; countPubKey < 64; countPubKey++) {
+ //    	if(public[countPubKey] != lAddrVm[(sizeVm - 128) + countPubKey])
+ //    		return 0;
+	// }
+
+
+	// for(countPubKey = 0; countPubKey < 64; i++){
+	// 	if(!(testkey[countPubKey] == public[countPubKey])) return 0; 
+	// 	/* Uncomment this if the above doesn't work*/	
+	// }
 	return 1;
 }
 
@@ -226,7 +230,7 @@ static void get_allowed_vm(void){
 	int valid = 0;
 	while(aux){
 		vm = (vm_t*)aux->elem; //acquire vm_t pointer
-		if(!(valid = verifyPublicKey2(vm,testkey)))printf("Fail\n");
+		if(!(valid = verifyPublicKey3(vm,testkey)))printf("Fail\n");
 		else printf("Success\n");
 		ret+= valid;;
 		aux = aux->next;

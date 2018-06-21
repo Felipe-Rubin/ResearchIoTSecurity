@@ -67,7 +67,9 @@ static char fail_msg[] = "\nWrong Password, your ip has been registered.\n";
 static char dummy_msg[] = "\nDummy msg.\n";
 
 #define PASS_BUFFER_SIZE 128
+#define VMS_BUFFER_SIZE 1024
 static char passbuffer[PASS_BUFFER_SIZE];
+static char vmsbuffer[VMS_BUFFER_SIZE];
 
 static struct pico_socket *socket = NULL;
 static struct pico_ip4 my_eth_addr, netmask;
@@ -154,9 +156,12 @@ static int verifyPassword()
     uint32_t i;
     printf("0=%c.%x\n",passbuffer[0],(uint8_t*)actualdata[0]);
 
-    if(!get_allowed_update(actualdata))
-        return 0;
-    return 1;
+    // if(!get_allowed_update(actualdata))
+    //     return 0;
+    // return 1;
+
+
+    return get_owned_vms(actualdata);
 }
 //FROM Moratelli's tcp-listener examples
 static uint32_t calculate_ms_passed(uint32_t old_ticks, uint32_t new_ticks)
@@ -225,7 +230,7 @@ static void start_listening(uint16_t ev, struct pico_socket *socket)
             /* Check if received public key is valid */
             int validpass = verifyPassword();
 
-            if(!validpass || 1){ //It is not
+            if(!validpass){ //It is not
                 validwrite = pico_socket_write(socket_client,fail_msg,strlen(fail_msg));
                 if(validwrite < 0) printf("Error2.1 writing message\n");
             }else{//It is 
@@ -236,6 +241,8 @@ static void start_listening(uint16_t ev, struct pico_socket *socket)
         }else{//Already verified
             validwrite = pico_socket_write(socket_client,dummy_msg,strlen(dummy_msg));
             if(validwrite < 0) printf("Error3.1 writing message\n");
+            validwrite = pico_socket_write(socket_client,vmsbuffer,strlen(vmsbuffer));
+            if(validwrite < 0) printf("Error3.2 writing message\n");
         }
     }
 

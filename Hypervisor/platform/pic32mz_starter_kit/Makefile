@@ -37,11 +37,13 @@ CONFIG_INTERRUPT_REDIRECT_DRV = yes
 
 
 
+
 #Author: Felipe Pfeifer Rubin
 # VM UPDATE DRIVER
 CONFIG_VM_UPDATE = yes
-CONFIG_PUF_FLASH_DRV = yes
-
+# CONFIG_PUF_FLASH_DRV = yes
+#NEW DRIVER
+CONFIG_REMOTE_CONNECTION = yes
 # Platform info
 CFLAGS = -DCPU_ID="M5150"
 CFLAGS += -DCPU_ARCH="Microchip Starter Kit"

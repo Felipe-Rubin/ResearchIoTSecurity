@@ -180,8 +180,22 @@ asm volatile (                    \
  move %0, $v0" \
  : "=r" (__ret) : "r" ((uint32_t) (pubkey)), "I" (HCALL_UPDATE_GET_ALLOWED) : "a0", "v0"); \
  __ret; })
- 
 
- 
+
+
+/* Hypercall to get owned VMs names given a public key*/
+#define get_owned_vms(pubkey)({int32_t __ret; \
+ asm volatile (							\
+ "move $a0, %z1 \n \
+  hypcall %2 \n\
+  move %0, $v0" \
+  : "=r" (__ret) : "r" ((uint32_t) (pubkey)), "I" (HCALL_GET_OWNED_LIST) : "a0", "v0"); \
+  __ret; })
 #endif
+
+
+
+
+
+
 

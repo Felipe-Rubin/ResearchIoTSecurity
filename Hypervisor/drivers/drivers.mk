@@ -44,6 +44,10 @@ ifeq ($(CONFIG_PIC32MZ_ETHERNET_DRV),yes)
 endif 
 
 
+ifeq ($(CONFIG_REMOTE_CONNECTION),yes)
+	DRIVERS_LIST += $(TOPDIR)drivers/pic32mz-remote-connection.c
+endif 
+
 
 drivers:
 	$(CC) $(CFLAGS) $(INC_DIRS) $(DRIVER_INCLUDE) $(DRIVERS_LIST)
